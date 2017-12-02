@@ -37,6 +37,7 @@ library
     , random >=1.1
   exposed-modules:
       AOC.Day1
+      AOC.Day2
   other-modules:
       Paths_AOC2017
   default-language: Haskell2010

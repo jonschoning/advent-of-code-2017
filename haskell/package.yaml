@@ -27,6 +27,7 @@ library:
   - -fwarn-incomplete-patterns
   exposed-modules:
   - AOC.Day1
+  - AOC.Day2
   dependencies:
   - time >=1.5
   - vector >=0.10.9

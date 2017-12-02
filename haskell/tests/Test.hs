@@ -1,7 +1,4 @@
-{-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE PartialTypeSignatures #-}
 
 module Main where
 
@@ -10,6 +7,7 @@ import Test.HUnit.Lang
 import qualified Data.ByteString.Char8 as B8
 
 import qualified AOC.Day1 as D1
+import qualified AOC.Day2 as D2
 
 assertSuccess :: Expectation
 assertSuccess = Success `shouldBe` Success
@@ -51,3 +49,7 @@ main = do
       it "input: file[input/day1.txt] (zip) " $ do
        input <- B8.readFile "input/day1.txt"
        D1.p2zip input `shouldBe` 1284
+
+    describe "Day2/Part1" $ do
+      it "input: " $ do
+       D2.p1 "" `shouldBe` 1

@@ -16,3 +16,5 @@ day1p1: $(aoc)
 	$(aoc) 1 1 input/day1.txt
 day1p2: $(aoc)
 	$(aoc) 1 2 input/day1.txt
+day2p1: $(aoc)
+	$(aoc) 2 1 input/day2.txt

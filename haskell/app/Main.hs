@@ -4,6 +4,7 @@ import System.Environment (getArgs)
 import qualified Data.ByteString.Char8 as B8
 
 import qualified AOC.Day1 as D1
+import qualified AOC.Day2 as D2
 
 main :: IO ()
 main = do
@@ -18,5 +19,9 @@ main = do
       let (inputfile:_) = rest
       input <- B8.readFile inputfile
       putStrLn $ show $ D1.p2zip input
+    ("2", "1") -> do
+      let (inputfile:_) = rest
+      input <- B8.readFile inputfile
+      putStrLn $ show $ D2.p1 input
     _ -> do
       putStrLn "TODO"
