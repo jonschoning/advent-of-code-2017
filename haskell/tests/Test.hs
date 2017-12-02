@@ -7,7 +7,7 @@ module Main where
 
 import Test.Hspec
 import Test.HUnit.Lang
-import qualified Data.ByteString.Char8 as C8
+import qualified Data.ByteString.Char8 as B8
 
 import qualified AOC.Day1 as D1
 
@@ -17,6 +17,7 @@ assertSuccess = Success `shouldBe` Success
 main :: IO ()
 main = do
   hspec $ do
+
     describe "Day1/Part1" $ do
       it "input: 1122" $ do
        D1.p1fold "1122" `shouldBe` 3
@@ -31,11 +32,22 @@ main = do
        D1.p1fold "91212129" `shouldBe` 9
        D1.p1zip "91212129" `shouldBe` 9
       it "input: file[input/day1.txt] (fold) " $ do
-       input <- C8.readFile "input/day1.txt"
+       input <- B8.readFile "input/day1.txt"
        D1.p1fold input `shouldBe` 1223
       it "input: file[input/day1.txt] (zip) " $ do
-       input <- C8.readFile "input/day1.txt"
+       input <- B8.readFile "input/day1.txt"
        D1.p1zip input `shouldBe` 1223
     describe "Day1/Part2" $ do
-      it "" $ do
-       assertFailure "todo"
+      it "input: 1212" $ do
+       D1.p2zip "1212" `shouldBe` 6
+      it "input: 1221" $ do
+       D1.p2zip "1221" `shouldBe` 0
+      it "input: 123425" $ do
+       D1.p2zip "123425" `shouldBe` 4
+      it "input: 123123" $ do
+       D1.p2zip "123123" `shouldBe` 12
+      it "input: 12131415" $ do
+       D1.p2zip "12131415" `shouldBe` 4
+      it "input: file[input/day1.txt] (zip) " $ do
+       input <- B8.readFile "input/day1.txt"
+       D1.p2zip input `shouldBe` 1284
