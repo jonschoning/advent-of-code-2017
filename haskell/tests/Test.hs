@@ -62,3 +62,17 @@ main = do
       it "input: file[input/day2.txt]" $ do
         input <- B8.readFile "input/day2.txt"
         D2.p1 input `shouldBe` 53978
+
+    describe "Day2/Part2" $ do
+      it "input: \n5 9 2 8\n9 4 7 3\n3 8 6 5" $ do
+        let input =
+              flip B8.snoc '\n' $ B8.intercalate "\n" $ fmap (B8.intercalate "\t") $
+                  [ ["5", "9", "2", "8"]
+                  , ["9", "4", "7", "3"]
+                  , ["3", "8", "6", "5"]
+                  ]
+        D2.p2 input `shouldBe` 9
+        assertFailure "todo"
+      it "input: file[input/day2.txt]" $ do
+        input <- B8.readFile "input/day2.txt"
+        D2.p2 input `shouldBe` -1

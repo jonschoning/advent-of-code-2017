@@ -23,5 +23,9 @@ main = do
       let (inputfile:_) = rest
       input <- B8.readFile inputfile
       putStrLn $ show $ D2.p1 input
+    ("2", "2") -> do
+      let (inputfile:_) = rest
+      input <- B8.readFile inputfile
+      putStrLn $ show $ D2.p2 input
     _ -> do
       putStrLn "TODO"
