@@ -72,7 +72,6 @@ main = do
                   , ["3", "8", "6", "5"]
                   ]
         D2.p2 input `shouldBe` 9
-        assertFailure "todo"
       it "input: file[input/day2.txt]" $ do
         input <- B8.readFile "input/day2.txt"
-        D2.p2 input `shouldBe` -1
+        D2.p2 input `shouldBe` 314

@@ -1,6 +1,8 @@
 module AOC.Day2 where
 
-import Data.Maybe (catMaybes)
+import Data.List (find)
+import Data.Maybe (fromJust, catMaybes)
+import Data.Monoid (getFirst, First(..))
 import qualified Data.ByteString.Char8 as B8
 
 -- * Part One
@@ -15,11 +17,8 @@ checksum is the sum of all of these differences.
 
 p1 :: B8.ByteString -> Int
 p1 = do
-  sum
-    . fmap checksum
-    . readLines
+  sum . fmap checksum . readLines
   where
-    checksum :: [Int] -> Int
     checksum xs = maximum xs - minimum xs
 
 -- * Part Two
@@ -34,13 +33,12 @@ result.
 
 p2 :: B8.ByteString -> Int
 p2 = do
-  sum
-    . fmap divideResult
-    . readLines
+  sum . fmap divideResult . readLines
   where
-    divideResult :: [Int] -> Int
-    divideResult xs = maximum xs - minimum xs
-
+    isFactor x y = x /= y && rem x y == 0
+    divideResult xs =
+      fromJust . getFirst $
+      foldMap (\x -> First $ (x `div`) <$> find (isFactor x) xs) xs
 
 -- * Utils
 
