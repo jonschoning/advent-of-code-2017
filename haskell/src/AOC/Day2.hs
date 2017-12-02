@@ -1,8 +1,9 @@
 {-# LANGUAGE BangPatterns #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 
 module AOC.Day2 where
 
-import Data.Char (digitToInt)
+import Data.Maybe (catMaybes)
 import qualified Data.ByteString.Char8 as B8
 
 -- The spreadsheet consists of rows of apparently-random numbers. To make
@@ -12,4 +13,12 @@ import qualified Data.ByteString.Char8 as B8
 -- checksum is the sum of all of these differences.
 
 p1 :: B8.ByteString -> Int
-p1 input = 0
+p1 input = do
+  sum
+    . fmap checksum
+    . fmap (fmap fst . catMaybes . fmap B8.readInt . B8.split '\t')
+    $ B8.lines input
+  where
+    checksum :: [Int] -> Int;
+    checksum xs = maximum xs - minimum xs
+
