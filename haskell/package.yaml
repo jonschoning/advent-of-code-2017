@@ -1,0 +1,49 @@
+name: AOC2017 
+version: '0.0.0.1'
+synopsis: Avent of Code 2017
+description: ! '
+  Avent of Code 2017
+'
+author: Jon Schoning
+maintainer: jonschoning@gmail.com
+copyright: Copyright (c) 2015 Jon Schoning
+license: MIT
+homepage: https://github.com/jonschoning/advent-of-code-2017
+git: git://github.com/jonschoning/advent-of-code-2017.git
+bug-reports: https://github.com/jonschoning/advent-of-code-2017/issues
+ghc-options: -Wall -O2
+dependencies:
+- base >=4.7 && <5.0
+- bytestring >=0.10.0
+- containers
+- mtl >=2.2.1
+- safe-exceptions <0.2
+- text >=0.11
+- transformers >=0.4.0.0
+- unordered-containers
+library:
+  source-dirs: src
+  ghc-options:
+  - -fwarn-incomplete-patterns
+  exposed-modules:
+  - AOC.Day1
+  dependencies:
+  - time >=1.5
+  - vector >=0.10.9
+  - random >=1.1
+executables:
+  AOC:
+    main: app/Main.hs
+    dependencies:
+    - AOC2017
+    - unix
+tests:
+  tests:
+    main: Test.hs
+    source-dirs: tests
+    ghc-options:
+    - -fno-warn-orphans
+    dependencies:
+    - AOC2017
+    - hspec >=1.8
+    - HUnit > 1.5.0
