@@ -5,6 +5,8 @@ import Data.Maybe (fromJust, catMaybes)
 import Data.Monoid (getFirst, First(..))
 import qualified Data.ByteString.Char8 as B8
 
+import Debug.Trace
+
 -- * Part One
 
 {-|

@@ -5,6 +5,7 @@ import qualified Data.ByteString.Char8 as B8
 
 import qualified AOC.Day1 as D1
 import qualified AOC.Day2 as D2
+import qualified AOC.Day3 as D3
 
 main :: IO ()
 main = do
@@ -27,5 +28,13 @@ main = do
       let (inputfile:_) = rest
       input <- B8.readFile inputfile
       putStrLn $ show $ D2.p2 input
+    ("3", "1") -> do
+      let (inputfile:_) = rest
+      input <- B8.readFile inputfile
+      putStrLn $ show $ D3.p1 input
+    ("3", "2") -> do
+      let (inputfile:_) = rest
+      input <- B8.readFile inputfile
+      putStrLn $ show $ D3.p2 input
     _ -> do
       putStrLn "TODO"

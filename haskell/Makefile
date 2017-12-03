@@ -20,3 +20,7 @@ day2p1: $(aoc)
 	$(aoc) 2 1 input/day2.txt
 day2p2: $(aoc)
 	$(aoc) 2 2 input/day2.txt
+day3p1: $(aoc)
+	$(aoc) 3 1 input/day3.txt
+day3p2: $(aoc)
+	$(aoc) 3 2 input/day3.txt

@@ -6,8 +6,9 @@ import Test.Hspec
 import Test.HUnit.Lang
 import qualified Data.ByteString.Char8 as B8
 
-import qualified AOC.Day1 as  D1
+import qualified AOC.Day1 as D1
 import qualified AOC.Day2 as D2
+import qualified AOC.Day3 as D3
 
 assertSuccess :: Expectation
 assertSuccess = Success `shouldBe` Success
@@ -75,3 +76,23 @@ main = do
       it "input: file[input/day2.txt]" $ do
         input <- B8.readFile "input/day2.txt"
         D2.p2 input `shouldBe` 314
+
+    describe "Day3/Part1" $ do
+      it "input: 1 -> 0" $ do
+        D3.p1 1 `shouldBe` 0
+      it "input: 12 -> 3" $ do
+        D3.p1 12 `shouldBe` 3
+      it "input: 23 -> 2" $ do
+        D3.p1 23 `shouldBe` 2
+      it "input: 1024 -> 31" $ do
+        D3.p1 1024 `shouldBe` 31
+      -- it "input: file[input/day3.txt]" $ do
+      --   D3.p1 325489 `shouldBe` undefined
+
+    -- describe "Day3/Part2" $ do
+    --   it "input: " $ do
+    --     let input = undefined
+    --     D3.p2 input `shouldBe` undefined
+    --   it "input: file[input/day3.txt]" $ do
+    --     input <- B8.readFile "input/day3.txt"
+    --     D3.p2 input `shouldBe` undefined
