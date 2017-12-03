@@ -1,5 +1,6 @@
 .PHONY: default clean
 aoc=.stack-work/dist/x86_64-linux-nopie/Cabal-1.24.2.0/build/AOC/AOC
+ghcflags = --ghc-options -O2
 
 default:;
 
@@ -10,7 +11,7 @@ test:
 	stack test --fast
 
 $(aoc): app/Main.hs
-	stack build
+	stack build $(ghcflags)
 
 day1p1: $(aoc)
 	$(aoc) 1 1 input/day1.txt

@@ -78,21 +78,19 @@ main = do
         D2.p2 input `shouldBe` 314
 
     describe "Day3/Part1" $ do
-      it "input: 1 -> 0" $ do
+      it "1 -> 0" $ do
         D3.p1 1 `shouldBe` 0
-      it "input: 12 -> 3" $ do
+      it "12 -> 3" $ do
         D3.p1 12 `shouldBe` 3
-      it "input: 23 -> 2" $ do
+      it "23 -> 2" $ do
         D3.p1 23 `shouldBe` 2
-      it "input: 1024 -> 31" $ do
+      it "1024 -> 31" $ do
         D3.p1 1024 `shouldBe` 31
-      -- it "input: file[input/day3.txt]" $ do
-      --   D3.p1 325489 `shouldBe` undefined
+      it "325489 -> 552" $ do
+        Just (input, _) <- B8.readInt <$> B8.readFile "input/day3.txt"
+        D3.p1 input `shouldBe` 552
 
-    -- describe "Day3/Part2" $ do
-    --   it "input: " $ do
-    --     let input = undefined
-    --     D3.p2 input `shouldBe` undefined
-    --   it "input: file[input/day3.txt]" $ do
-    --     input <- B8.readFile "input/day3.txt"
-    --     D3.p2 input `shouldBe` undefined
+    describe "day3/part2" $ do
+      it "325489 -> 330785" $ do
+        Just (input, _) <- B8.readInt <$> B8.readFile "input/day3.txt"
+        D3.p2 input `shouldBe` 330785
