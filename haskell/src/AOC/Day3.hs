@@ -94,7 +94,7 @@ p2 :: Int -> Int
 p2 input = fromJust $ find (> input) $ gridValues
 
 gridValues :: [Int]
-gridValues = unfoldr step (initialGrid, drop 1 (coords initialOrigin))
+gridValues = unfoldr step (initialGrid, tail (coords initialOrigin))
   where
     step (grid, (coord:cs)) = do
       let s = sum $ (\c -> M.findWithDefault 0 c grid) <$> neighbors coord
@@ -104,4 +104,4 @@ initialGrid :: M.Map Coord Int
 initialGrid = M.singleton initialOrigin 1
 
 neighbors :: Coord -> [Coord]
-neighbors = take 8 . drop 1 . coords
+neighbors = take 8 . tail . coords

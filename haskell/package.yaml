@@ -43,8 +43,8 @@ executables:
     - AOC2017
     - unix
 tests:
-  tests:
-    main: Test.hs
+  spec:
+    main: Spec.hs
     source-dirs: tests
     ghc-options:
     - -fno-warn-orphans
