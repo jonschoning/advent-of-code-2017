@@ -32,6 +32,7 @@ library
     , text >=0.11
     , transformers >=0.4.0.0
     , unordered-containers
+    , lens
     , time >=1.5
     , vector >=0.10.9
     , random >=1.1
@@ -40,6 +41,7 @@ library
       AOC.Day1
       AOC.Day2
       AOC.Day3
+      AOC.Day4
   other-modules:
       Paths_AOC2017
   default-language: Haskell2010
@@ -56,6 +58,7 @@ executable AOC
     , text >=0.11
     , transformers >=0.4.0.0
     , unordered-containers
+    , lens
     , AOC2017
     , unix
   default-language: Haskell2010
@@ -75,6 +78,7 @@ test-suite spec
     , text >=0.11
     , transformers >=0.4.0.0
     , unordered-containers
+    , lens
     , AOC2017
     , hspec >=1.8
     , HUnit > 1.5.0
@@ -82,4 +86,5 @@ test-suite spec
       Day1Spec
       Day2Spec
       Day3Spec
+      Day4Spec
   default-language: Haskell2010

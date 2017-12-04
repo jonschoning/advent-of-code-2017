@@ -37,3 +37,10 @@ day3p1: $(aoc)
 	$(aoc) 3 1 input/day3.txt
 day3p2: $(aoc)
 	$(aoc) 3 2 input/day3.txt
+
+day4test:
+	$(stack) test $(targs)=Day4
+day4p1: $(aoc)
+	$(aoc) 4 1 input/day4.txt
+day4p2: $(aoc)
+	$(aoc) 4 2 input/day4.txt
