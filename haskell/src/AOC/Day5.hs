@@ -1,14 +1,12 @@
 {-# LANGUAGE BangPatterns #-}
-{-# OPTIONS_GHC -fno-warn-incomplete-patterns #-}
-{-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 
 module AOC.Day5 where
 
-import Data.Maybe
-import Control.Monad.ST
+import Data.Maybe (fromJust)
+import Control.Monad.ST (runST, ST)
+import qualified Data.ByteString.Char8 as B8 (ByteString, lines, readInt)
 import qualified Data.Vector.Unboxed as V
 import qualified Data.Vector.Unboxed.Mutable as MV
-import qualified Data.ByteString.Char8 as B8
 
 -- * Part One
 
@@ -31,16 +29,21 @@ How many steps does it take to reach the exit?
 -}
 
 p1 :: B8.ByteString -> Int
-p1 input = runST $ V.thaw (readLines input) >>= go succ 0 0 
+p1 input = runST $ go succ 0 0 =<< V.unsafeThaw (readLines input)
 
-go newoffset !n !pos !v = do
-    if pos < 0 || pos >= MV.length v
+go
+  :: (Int -> Int) -- ^ calculate new offset from old offset
+  -> Int -- ^ number of steps taken
+  -> Int -- ^ current position in the vector
+  -> MV.STVector s Int
+  -> ST s Int
+go updateoffset !n !pos !v = do
+  if pos < 0 || pos >= MV.length v
     then pure n
     else do
-        offset <- MV.read v pos
-        MV.write v pos (newoffset offset)
-        go newoffset (n + 1) (pos + offset) v
-{-# INLINE go #-}
+      offset <- MV.unsafeRead v pos
+      MV.unsafeWrite v pos (updateoffset offset)
+      go updateoffset (n + 1) (pos + offset) v
 
 -- * Part Two
 
@@ -57,11 +60,10 @@ How many steps does it now take to reach the exit?
 -}
 
 p2 :: B8.ByteString -> Int
-p2 input = runST $ V.thaw (readLines input) >>= go newoffset 0 0
+p2 input = runST $ go newoffset 0 0 =<< V.unsafeThaw (readLines input)
   where
     newoffset o = if o >= 3 then pred o else succ o
 
--- (if offset >= 3 then offset-1 else offset+1)
 -- * Utils
 
 readLines :: B8.ByteString -> V.Vector Int
