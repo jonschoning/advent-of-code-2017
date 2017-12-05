@@ -33,6 +33,7 @@ library:
   - AOC.Day2
   - AOC.Day3
   - AOC.Day4
+  - AOC.Day5
   dependencies:
   - time >=1.5
   - vector >=0.10.9

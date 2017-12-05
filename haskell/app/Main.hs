@@ -7,6 +7,7 @@ import qualified AOC.Day1 as D1
 import qualified AOC.Day2 as D2
 import qualified AOC.Day3 as D3
 import qualified AOC.Day4 as D4
+import qualified AOC.Day5 as D5
 
 main :: IO ()
 main = do
@@ -45,5 +46,13 @@ main = do
       let (inputfile:_) = rest
       input <- B8.readFile inputfile
       putStrLn $ show $ D4.p2 input
+    -- ("5", "1") -> do
+    --   let (inputfile:_) = rest
+    --   input <- B8.readFile inputfile
+    --   putStrLn $ show $ D5.p1 input
+    -- ("5", "2") -> do
+    --   let (inputfile:_) = rest
+    --   input <- B8.readFile inputfile
+    --   putStrLn $ show $ D5.p2 input
     _ -> do
       putStrLn "TODO"
