@@ -46,13 +46,13 @@ main = do
       let (inputfile:_) = rest
       input <- B8.readFile inputfile
       putStrLn $ show $ D4.p2 input
-    -- ("5", "1") -> do
-    --   let (inputfile:_) = rest
-    --   input <- B8.readFile inputfile
-    --   putStrLn $ show $ D5.p1 input
-    -- ("5", "2") -> do
-    --   let (inputfile:_) = rest
-    --   input <- B8.readFile inputfile
-    --   putStrLn $ show $ D5.p2 input
+    ("5", "1") -> do
+      let (inputfile:_) = rest
+      input <- B8.readFile inputfile
+      putStrLn $ show $ D5.p1 input
+    ("5", "2") -> do
+      let (inputfile:_) = rest
+      input <- B8.readFile inputfile
+      putStrLn $ show $ D5.p2 input
     _ -> do
       putStrLn "TODO"
