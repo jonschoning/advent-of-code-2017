@@ -52,3 +52,10 @@ day5p1: $(aoc)
 	$(aoc) 5 1 input/day5.txt $(rtsopts)
 day5p2: $(aoc)
 	$(aoc) 5 2 input/day5.txt $(rtsopts)
+
+day6test:
+	$(stack) test --fast $(targs)=Day6
+day6p1: $(aoc)
+	$(aoc) 6 1 input/day6.txt $(rtsopts)
+day6p2: $(aoc)
+	$(aoc) 6 2 input/day6.txt $(rtsopts)
