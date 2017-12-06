@@ -1,3 +1,4 @@
+{-# LANGUAGE BangPatterns #-}
 {-# OPTIONS_GHC -fno-warn-incomplete-patterns #-}
 
 module AOC.Day3 where
@@ -58,10 +59,10 @@ moves = join $ unfoldr move (0, D)
 coords :: Coord -> [Coord]
 coords origin = scanl go origin moves
   where
-    go (x, y) R = (x+1, y  )
-    go (x, y) U = (x  , y+1)
-    go (x, y) L = (x-1, y  )
-    go (x, y) D = (x  , y-1)
+    go (!x, !y) R = (x+1, y  )
+    go (!x, !y) U = (x  , y+1)
+    go (!x, !y) L = (x-1, y  )
+    go (!x, !y) D = (x  , y-1)
 
 -- * Part Two
 

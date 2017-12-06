@@ -37,6 +37,7 @@ library
     , vector >=0.10.9
     , random >=1.1
     , split
+    , dlist
   exposed-modules:
       AOC.Day1
       AOC.Day2
