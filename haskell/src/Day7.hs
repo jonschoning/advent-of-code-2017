@@ -3,41 +3,36 @@
 
 module Day7 where
 
-import Data.Maybe
-import Data.List
-import Data.Char
-import qualified Data.Map.Strict as M
+import Data.Char (isDigit, isAlphaNum)
+import Data.Either.Combinators (fromLeft')
+import Data.List (foldl', partition)
+import Data.Maybe (fromJust)
 import qualified Data.ByteString.Char8 as B8
-
--- import qualified Data.Vector.Unboxed as V
 import qualified Data.Map.Strict as M
 
 import Debug.Trace
 
--- * Part One
+type SumWeight = Int
 
-{-|
--}
+type Name = String
 
-data Parsed =
-  Parsed String -- ^ Name
-         Int -- ^ Weight
-         [String] -- ^ children
+type UnbalancedInfo = [(SumWeight, Node)]
+
+data Node =
+  Node Name -- ^ Name
+       Int -- ^ Weight
+       [Name] -- ^ children
   deriving (Show)
 
-    -- as = M.fromList $ fmap (\(Parsed n _ l) -> (n, l)) ps
-    -- ws = M.fromList $ fmap (\(Parsed n w _) -> (n, w)) ps
+-- * Part One
 
--- |
---
---
 p1 :: B8.ByteString -> String
 p1 input = do
   findroot (head $ M.keys parents)
   where
     parsed = readLines input
     parents = foldl' insertParents M.empty parsed
-    insertParents m (Parsed n _ c) = do
+    insertParents m (Node n _ c) = do
       m `M.union` M.fromList (fmap (, n) c)
     findroot k =
       case M.lookup k parents of
@@ -46,23 +41,39 @@ p1 input = do
 
 -- * Part Two
 
-{-|
--}
-
--- |
---
---
 p2 :: B8.ByteString -> Int
-p2 _ = 0
+p2 input = calcCorrection . fromLeft' . findUnbalanced . get $ p1 input
+  where
+    get :: String -> Node
+    get n = fromJust $ M.lookup n assocs
+
+    assocs :: M.Map Name Node
+    assocs = M.fromList $ fmap (\p@(Node n _ _) -> (n, p)) $ readLines input
+
+    findUnbalanced :: Node -> Either UnbalancedInfo SumWeight
+    findUnbalanced (Node _ w c) = do
+      let cs = fmap get c
+      wcs <- traverse findUnbalanced cs
+      if all (== head wcs) wcs
+        then Right (w + sum wcs)
+        else Left (zip wcs cs)
+
+    calcCorrection :: UnbalancedInfo -> Int
+    calcCorrection u = do
+        let (a, b) = partition (\p -> fst p == fst (head u)) u
+            ((e, _):_, [(s, Node _ w _)]) = if length a == 1 then (b, a) else (a, b)
+        e - s + w
 
 -- * Utils
 
-parseLine :: [String] -> Parsed
-parseLine (n:w:[]) = Parsed n (read $ filter isDigit w) []
-parseLine (n:w:_:children) = Parsed n (read $ filter isDigit w) (fmap (filter isAlphaNum) children)
+parseLine :: [String] -> Node
+parseLine (n:w:[]) =
+  Node n (read $ filter isDigit w) []
+parseLine (n:w:_:c) =
+  Node n (read $ filter isDigit w) (filter isAlphaNum <$> c)
 parseLine s = error (concat s)
 
-readLines :: B8.ByteString -> [Parsed]
+readLines :: B8.ByteString -> [Node]
 readLines =
   fmap (parseLine . words)
   . lines

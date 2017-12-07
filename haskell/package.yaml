@@ -22,6 +22,7 @@ dependencies:
 - transformers >=0.4.0.0
 - unordered-containers
 - lens
+- either
 library:
   source-dirs: src
   ghc-options:

@@ -33,6 +33,7 @@ library
     , transformers >=0.4.0.0
     , unordered-containers
     , lens
+    , either
     , time >=1.5
     , vector >=0.10.9
     , random >=1.1
@@ -62,6 +63,7 @@ executable AOC2017
     , transformers >=0.4.0.0
     , unordered-containers
     , lens
+    , either
     , AOC2017
     , unix
   default-language: Haskell2010
@@ -82,6 +84,7 @@ test-suite spec
     , transformers >=0.4.0.0
     , unordered-containers
     , lens
+    , either
     , AOC2017
     , hspec >=1.8
     , HUnit > 1.5.0
