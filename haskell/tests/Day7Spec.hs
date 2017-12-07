@@ -14,9 +14,9 @@ spec :: Spec
 spec = do
 
     describe "Part1" $ do
-      it "input/day7.txt -> A" $ do
+      it "input/day7.txt -> eqgvf" $ do
         input <- B8.readFile "input/day7.txt"
-        D7.p1 input `shouldBe` "A"
+        D7.p1 input `shouldBe` "eqgvf"
 
     -- describe "Part2" $ do
     --   it "0 2 7 0 -> 4" $ do
