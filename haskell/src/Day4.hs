@@ -1,6 +1,6 @@
 {-# OPTIONS_GHC -fno-warn-incomplete-patterns #-}
 
-module AOC.Day4 where
+module Day4 where
 
 import Data.List 
 import qualified Data.ByteString.Char8 as B8

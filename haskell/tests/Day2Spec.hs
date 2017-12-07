@@ -5,7 +5,7 @@ module Day2Spec where
 import Test.Hspec
 import qualified Data.ByteString.Char8 as B8
 
-import qualified AOC.Day2 as D2
+import qualified Day2 as D2
 
 main :: IO ()
 main = hspec spec

@@ -3,12 +3,12 @@
 import System.Environment (getArgs)
 import qualified Data.ByteString.Char8 as B8
 
-import qualified AOC.Day1 as D1
-import qualified AOC.Day2 as D2
-import qualified AOC.Day3 as D3
-import qualified AOC.Day4 as D4
-import qualified AOC.Day5 as D5
-import qualified AOC.Day6 as D6
+import qualified Day1 as D1
+import qualified Day2 as D2
+import qualified Day3 as D3
+import qualified Day4 as D4
+import qualified Day5 as D5
+import qualified Day6 as D6
 
 main :: IO ()
 main = do

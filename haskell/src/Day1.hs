@@ -1,6 +1,6 @@
 {-# LANGUAGE BangPatterns #-}
 
-module AOC.Day1 where
+module Day1 where
 
 import Data.Char (digitToInt)
 import qualified Data.ByteString.Char8 as B8

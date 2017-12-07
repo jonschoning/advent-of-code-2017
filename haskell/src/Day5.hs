@@ -1,6 +1,6 @@
 {-# LANGUAGE BangPatterns #-}
 
-module AOC.Day5 where
+module Day5 where
 
 import Data.Maybe (fromJust)
 import Control.Monad.ST (runST, ST)

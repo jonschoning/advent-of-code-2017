@@ -1,4 +1,4 @@
-module AOC.Day2 where
+module Day2 where
 
 import Data.List (find)
 import Data.Maybe (fromJust, catMaybes)

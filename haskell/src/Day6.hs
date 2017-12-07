@@ -1,6 +1,6 @@
 {-# LANGUAGE BangPatterns #-}
 
-module AOC.Day6 where
+module Day6 where
 
 import Data.Maybe
 import qualified Data.ByteString.Char8 as B8

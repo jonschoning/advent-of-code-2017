@@ -29,19 +29,19 @@ library:
   - -fno-warn-unused-imports
 
   exposed-modules:
-  - AOC.Day1
-  - AOC.Day2
-  - AOC.Day3
-  - AOC.Day4
-  - AOC.Day5
-  - AOC.Day6
+  - Day1
+  - Day2
+  - Day3
+  - Day4
+  - Day5
+  - Day6
   dependencies:
   - time >=1.5
   - vector >=0.10.9
   - random >=1.1
   - split
 executables:
-  AOC:
+  AOC2017:
     main: app/Main.hs
     dependencies:
     - AOC2017

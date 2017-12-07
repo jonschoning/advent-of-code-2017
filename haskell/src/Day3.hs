@@ -1,7 +1,7 @@
 {-# LANGUAGE BangPatterns #-}
 {-# OPTIONS_GHC -fno-warn-incomplete-patterns #-}
 
-module AOC.Day3 where
+module Day3 where
 
 import Data.List 
 import Data.Maybe
