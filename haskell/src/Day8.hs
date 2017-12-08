@@ -7,7 +7,6 @@ module Day8 where
 import Data.List
 import qualified Data.ByteString.Char8 as B8
 import qualified Data.Map.Strict as M
-import Prelude hiding (LT, EQ, GT)
 
 -- | parse input
 readLines :: B8.ByteString -> [Inst]
@@ -19,64 +18,55 @@ parseLine (reg:op:amt:_:cReg:cComp:cAmt:[]) =
   Inst reg (readOp op) (read amt) (Cond cReg (readComp cComp) (read cAmt))
 parseLine s = error (concat s)
 
+-- | Cpu
+type Cpu = M.Map Reg Amt
+
 -- | Register
 type Reg = String
 
--- | Amount/Regsiter Value
+-- | Amount/Register Value
 type Amt = Int
 
 -- | Instruction
-data Inst = Inst Reg Op Amt Cond deriving (Show, Eq)
+data Inst = Inst Reg Op Amt Cond
 
 -- | Condition
-data Cond = Cond Reg Comp Amt deriving (Show, Eq)
+data Cond = Cond Reg Comp Amt
 
 -- | Operation
-data Op = Inc | Dec deriving (Show, Eq)
+type Op = (Int -> Int -> Int)
 
 readOp :: String -> Op
 readOp = \case
-  "inc" -> Inc
-  "dec" -> Dec
+  "inc" -> (+)
+  "dec" -> (-)
   _    -> error "bad parse"
 
-runOp :: Op -> (Int -> Int -> Int)
-runOp = \case
-  Inc -> (+)
-  Dec -> (-)
-
 -- | Comparison
-data Comp = LT | LTEQ | EQ | NEQ | GT | GTEQ deriving (Show, Eq)
+type Comp = (Int -> Int -> Bool)
 
 readComp :: String -> Comp
 readComp = \case
-  "<"  -> LT
-  "<=" -> LTEQ
-  "==" -> EQ
-  "!=" -> NEQ
-  ">"  -> GT
-  ">=" -> GTEQ
+  "<"  -> (<)
+  "<=" -> (<=)
+  "==" -> (==)
+  "!=" -> (/=)
+  ">"  -> (>)
+  ">=" -> (>=)
   _    -> error "bad parse"
 
-runComp :: Comp -> (Int -> Int -> Bool)
-runComp = \case
-  LT   -> (<)
-  LTEQ -> (<=)
-  EQ   -> (==)
-  NEQ  -> (/=)
-  GT   -> (>)
-  GTEQ -> (>=)
-
 -- | find the largest amount in any register
-largestAmt :: M.Map Reg Amt -> Amt
-largestAmt = maximum . fmap snd . M.toList
+largestAmt :: Cpu -> Amt
+largestAmt = M.foldl' max 0
 
 -- | execute an instruction on the "cpu"
-runInst :: M.Map Reg Amt -> Inst -> M.Map Reg Amt
+runInst :: Cpu -> Inst -> Cpu
 runInst !cpu (Inst reg op amt (Cond cReg cComp cAmt)) =
-  if ((runComp cComp) (M.findWithDefault 0 cReg cpu) cAmt)
-    then M.insert reg ((runOp op) (M.findWithDefault 0 reg cpu) amt) cpu
+  if (get cReg `cComp` cAmt)
+    then M.insert reg (get reg `op` amt) cpu
     else cpu
+  where
+    get r = M.findWithDefault 0 r cpu
 
 -- * Part One
 
