@@ -1,5 +1,6 @@
 {-# LANGUAGE BangPatterns #-}
 {-# LANGUAGE TupleSections #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module Day8 where
 
@@ -12,13 +13,19 @@ import qualified Data.Map.Strict as M
 
 import Debug.Trace
 
+-- $setup
+-- >>> :set -XOverloadedStrings
+
 -- * Part One
 
+-- |
 p1 :: B8.ByteString -> Int
 p1 _ = 0
 
 -- * Part Two
 
+-- |
+--
 p2 :: B8.ByteString -> Int
 p2 _ = 0
 

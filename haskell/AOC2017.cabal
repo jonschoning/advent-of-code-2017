@@ -1,6 +1,8 @@
--- This file has been generated from package.yaml by hpack version 0.18.1.
+-- This file has been generated from package.yaml by hpack version 0.20.0.
 --
 -- see: https://github.com/sol/hpack
+--
+-- hash: 8f120fbf8ca8826c426e238da9f2bd0ba66ba476f82351fa3bd9d28ea079510b
 
 name:           AOC2017
 version:        0.0.0.1
@@ -27,17 +29,17 @@ library
       base >=4.7 && <5.0
     , bytestring >=0.10.0
     , containers
+    , either
+    , lens
     , mtl >=2.2.1
+    , random >=1.1
     , safe-exceptions <0.2
+    , split
     , text >=0.11
+    , time >=1.5
     , transformers >=0.4.0.0
     , unordered-containers
-    , lens
-    , either
-    , time >=1.5
     , vector >=0.10.9
-    , random >=1.1
-    , split
   exposed-modules:
       Day1
       Day2
@@ -55,18 +57,20 @@ executable AOC2017
   main-is: app/Main.hs
   ghc-options: -Wall -O2
   build-depends:
-      base >=4.7 && <5.0
+      AOC2017
+    , base >=4.7 && <5.0
     , bytestring >=0.10.0
     , containers
+    , either
+    , lens
     , mtl >=2.2.1
     , safe-exceptions <0.2
     , text >=0.11
     , transformers >=0.4.0.0
-    , unordered-containers
-    , lens
-    , either
-    , AOC2017
     , unix
+    , unordered-containers
+  other-modules:
+      Paths_AOC2017
   default-language: Haskell2010
 
 test-suite spec
@@ -76,19 +80,19 @@ test-suite spec
       tests
   ghc-options: -Wall -O2 -fno-warn-orphans
   build-depends:
-      base >=4.7 && <5.0
+      AOC2017
+    , HUnit >1.5.0
+    , base >=4.7 && <5.0
     , bytestring >=0.10.0
     , containers
+    , either
+    , hspec >=1.8
+    , lens
     , mtl >=2.2.1
     , safe-exceptions <0.2
     , text >=0.11
     , transformers >=0.4.0.0
     , unordered-containers
-    , lens
-    , either
-    , AOC2017
-    , hspec >=1.8
-    , HUnit > 1.5.0
   other-modules:
       Day1Spec
       Day2Spec
@@ -98,4 +102,5 @@ test-suite spec
       Day6Spec
       Day7Spec
       Day8Spec
+      Paths_AOC2017
   default-language: Haskell2010

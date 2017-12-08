@@ -7,6 +7,7 @@ import Data.List
 import Data.Maybe
 import Control.Monad
 import qualified Data.Map.Strict as M
+import qualified Data.ByteString.Char8 as B8
 
 import Debug.Trace
 
@@ -36,8 +37,8 @@ identified in your puzzle input all the way to the access port?
 type Coord = (Int, Int)
 data Move = R | U | L | D deriving (Eq, Show)
 
-p1 :: Int -> Int
-p1 = coordToDist . indexToCoord
+p1 :: B8.ByteString -> Int
+p1 = coordToDist . indexToCoord . parseLine
 
 initialOrigin :: Coord
 initialOrigin = (0,0)
@@ -91,8 +92,8 @@ first few squares would receive the following values:
 What is the first value written that is larger than your puzzle input?
 -}
 
-p2 :: Int -> Int
-p2 input = fromJust $ find (> input) $ gridValues
+p2 :: B8.ByteString -> Int
+p2 input = fromJust $ find (> (parseLine input)) $ gridValues
 
 gridValues :: [Int]
 gridValues = unfoldr step (initialGrid, tail (coords initialOrigin))
@@ -106,3 +107,8 @@ initialGrid = M.singleton initialOrigin 1
 
 neighbors :: Coord -> [Coord]
 neighbors = take 8 . tail . coords
+
+parseLine :: B8.ByteString -> Int
+parseLine input = do
+    let Just (i, _) = B8.readInt input
+    i
