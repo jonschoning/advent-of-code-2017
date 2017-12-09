@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 8f120fbf8ca8826c426e238da9f2bd0ba66ba476f82351fa3bd9d28ea079510b
+-- hash: a37448b69844780f5d65247261002ec46fa1136b91981c90ffe06ba43b944862
 
 name:           AOC2017
 version:        0.0.0.1
@@ -49,6 +49,7 @@ library
       Day6
       Day7
       Day8
+      Day9
   other-modules:
       Paths_AOC2017
   default-language: Haskell2010
@@ -102,5 +103,6 @@ test-suite spec
       Day6Spec
       Day7Spec
       Day8Spec
+      Day9Spec
       Paths_AOC2017
   default-language: Haskell2010

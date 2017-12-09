@@ -89,3 +89,13 @@ day8p1: $(aoc)
 	$(aoc) 8 1 input/day8.txt $(rtsopts)
 day8p2: $(aoc)
 	$(aoc) 8 2 input/day8.txt $(rtsopts)
+
+
+day9test:
+	$(stack) test --fast $(targs)=Day9
+day9test-doc:
+	$(stack) exec -- doctest --fast src/Day9.hs
+day9p1: $(aoc)
+	$(aoc) 9 1 input/day9.txt $(rtsopts)
+day9p2: $(aoc)
+	$(aoc) 9 2 input/day9.txt $(rtsopts)
