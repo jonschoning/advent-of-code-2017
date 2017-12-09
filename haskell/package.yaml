@@ -23,6 +23,7 @@ dependencies:
 - unordered-containers
 - lens
 - either
+- attoparsec
 library:
   source-dirs: src
   ghc-options:

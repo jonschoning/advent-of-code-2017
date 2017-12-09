@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: a37448b69844780f5d65247261002ec46fa1136b91981c90ffe06ba43b944862
+-- hash: 01d9b7afbb78b4aafc52743debf44be033ab56ff9c311c0e3fdeaba9549e3918
 
 name:           AOC2017
 version:        0.0.0.1
@@ -26,7 +26,8 @@ library
       src
   ghc-options: -Wall -O2 -fno-warn-unused-binds -fno-warn-unused-imports
   build-depends:
-      base >=4.7 && <5.0
+      attoparsec
+    , base >=4.7 && <5.0
     , bytestring >=0.10.0
     , containers
     , either
@@ -59,6 +60,7 @@ executable AOC2017
   ghc-options: -Wall -O2
   build-depends:
       AOC2017
+    , attoparsec
     , base >=4.7 && <5.0
     , bytestring >=0.10.0
     , containers
@@ -83,6 +85,7 @@ test-suite spec
   build-depends:
       AOC2017
     , HUnit >1.5.0
+    , attoparsec
     , base >=4.7 && <5.0
     , bytestring >=0.10.0
     , containers

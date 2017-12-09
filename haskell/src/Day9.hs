@@ -1,29 +1,50 @@
 {-# LANGUAGE BangPatterns #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE LambdaCase #-}
-{-# OPTIONS_GHC -fno-warn-incomplete-patterns #-}
+{-# OPTIONS_GHC -fno-warn-unused-do-bind #-}
 
 module Day9 where
 
-import Data.List
+import Data.Maybe (catMaybes)
+import Data.List (foldl')
+import qualified Data.Attoparsec.ByteString.Char8 as A
 import qualified Data.ByteString.Char8 as B8
-import qualified Data.Map.Strict as M
 
-import Debug.Trace
+data Stream
+  = Group !Int
+          [Stream]
+  | Garbage !Int
+  deriving (Show)
 
-readLines :: B8.ByteString -> [Int]
-readLines = fmap (parseLine . B8.words) . B8.lines
+pGroup :: Int -> A.Parser Stream
+pGroup i = do
+  A.char '{'
+  inner <-
+    A.sepBy
+      (A.choice [pGroup (i + 1), pGarbage])
+      (A.char ',')
+  A.char '}'
+  pure $ Group i inner
 
-parseLine :: [B8.ByteString] -> Int
-parseLine (i:[]) =
-  readInt i
-  where
-    readInt = maybe (error "readInt") fst . B8.readInt
+pGarbage :: A.Parser Stream
+pGarbage = do
+  A.char '<'
+  inner <-
+    A.many' $
+    A.choice [Nothing <$ (A.char '!' *> A.anyChar), Just <$> A.notChar '>']
+  A.char '>'
+  pure $ Garbage (length (catMaybes inner))
+
+parseTopGroup :: (Int -> [Stream] -> Int) -> B8.ByteString -> Int
+parseTopGroup f =
+  either error (\(Group s inner) -> f s inner) . A.parseOnly (pGroup 1)
 
 -- | Part one
 p1 :: B8.ByteString -> Int
-p1 _ = 0
+p1 = parseTopGroup (foldl' scoreGroup)
+  where scoreGroup a (Garbage _) = a
+        scoreGroup a (Group s inner) = a + foldl' scoreGroup s inner
 
--- | Part two
 p2 :: B8.ByteString -> Int
-p2 _ = 0
+p2 = parseTopGroup (\_ -> foldl' scoreGarbage 0)
+  where scoreGarbage a (Garbage s) = a + s
+        scoreGarbage a (Group _ inner) = a + foldl' scoreGarbage 0 inner
