@@ -14,10 +14,10 @@ spec :: Spec
 spec = do
 
     describe "Part1" $ do
-      it "input/day10.txt -> 1" $ do
+      it "input/day10.txt -> 23715" $ do
         input <- B8.readFile "input/day10.txt"
-        D10.p1 input `shouldBe` 1
-    describe "Part2" $ do
-      it "input/day10.txt -> 1" $ do
-        input <- B8.readFile "input/day10.txt"
-        D10.p2 input `shouldBe` 1
+        D10.p1 input `shouldBe` 23715
+    -- describe "Part2" $ do
+    --   it "input/day10.txt -> 1" $ do
+    --     input <- B8.readFile "input/day10.txt"
+    --     D10.p2 input `shouldBe` 1
