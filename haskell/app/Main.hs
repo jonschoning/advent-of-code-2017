@@ -12,6 +12,7 @@ import qualified Day6 as D6
 import qualified Day7 as D7
 import qualified Day8 as D8
 import qualified Day9 as D9
+import qualified Day10 as D10
 
 main :: IO ()
 main = do
@@ -37,4 +38,6 @@ main = do
     ("8", "2") -> show $ D8.p2 input
     ("9", "1") -> show $ D9.p1 input
     ("9", "2") -> show $ D9.p2 input
+    ("10", "1") -> show $ D10.p1 input
+    ("10", "2") -> show $ D10.p2 input
     _          -> "TODO"
