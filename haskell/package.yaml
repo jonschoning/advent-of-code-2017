@@ -52,6 +52,8 @@ executables:
     dependencies:
     - AOC2017
     - unix
+    - deepseq
+    - criterion
 tests:
   spec:
     main: Spec.hs

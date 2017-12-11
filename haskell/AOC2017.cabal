@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 6bed61611515f400bf7768d95c0e61632de82746225832dae0533521ad4ee0d9
+-- hash: 8edddc54a6e0af074f4836bea50c99f51a4caa3d4553d2fb027a88bd7e484db0
 
 name:           AOC2017
 version:        0.0.0.1
@@ -65,6 +65,8 @@ executable AOC2017
     , base >=4.7 && <5.0
     , bytestring >=0.10.0
     , containers
+    , criterion
+    , deepseq
     , either
     , lens
     , mtl >=2.2.1
