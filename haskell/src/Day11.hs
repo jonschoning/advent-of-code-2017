@@ -1,24 +1,32 @@
-{-# OPTIONS_GHC -fno-warn-incomplete-patterns #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module Day11 where
 
 import Data.List
-import Data.Foldable
-import Data.Maybe (catMaybes)
+import Data.Monoid
+import Data.Maybe
 import qualified Data.ByteString.Char8 as B8
-import qualified Data.Vector.Unboxed as V
 import qualified Data.Map.Strict as M
 
-import Debug.Trace
-
 data Cube =
-  Cube !Int -- ^ dx
-       !Int -- ^ dy
-       !Int -- ^ dz
+  Cube !Int -- ^ x
+       !Int -- ^ y
+       !Int -- ^ z
   deriving (Show)
 
-cube_directions :: M.Map String Cube
-cube_directions = M.fromList
+instance Num Cube where
+  Cube ax ay az + Cube bx by bz = Cube (ax + bx) (ay + by) (az + bz)
+  Cube ax ay az * Cube bx by bz = Cube (ax * bx) (ay * by) (az * bz)
+  abs (Cube x y z) = Cube (abs x) (abs y) (abs z)
+  negate (Cube x y z) =  Cube (-x) (-y) (-z)
+  signum = error "NA"
+  fromInteger = error "NA"
+
+toListCube :: Cube -> [Int]
+toListCube (Cube x y z) = [x, y, z]
+
+directions :: M.Map B8.ByteString Cube
+directions = M.fromList
   [ ("se", Cube 1 (-1) 0)
   , ("ne", Cube 1 0 (-1))
   , ("n" , Cube 0 1 (-1))
@@ -27,26 +35,24 @@ cube_directions = M.fromList
   , ("s" , Cube 0 (-1) 1)
   ]
 
-cube_distance (Cube ax ay az) (Cube bx by bz) =
-    maximum [abs(ax - bx), abs(ay - by), abs(az - bz)]
+distance :: Cube -> Cube -> Int
+distance a b = maximum (toListCube (abs (a - b)))
+
+move :: Cube -> B8.ByteString -> Cube
+move a = (a +) . fromJust . flip M.lookup directions
 
 origin :: Cube
 origin = Cube 0 0 0
 
 -- | Part one
 p1 :: B8.ByteString -> Int
-p1 = cube_distance origin . foldl' move origin . readLines
-  where
-    move (Cube x y z) s =
-      let Just (Cube dx dy dz) = M.lookup s cube_directions
-      in Cube (x+dx) (y+dy) (z+dz)
+p1 = distance origin . foldl' move origin . readLines
 
 -- | Part two
 p2 :: B8.ByteString -> Int
-p2 _ = 0
+p2 = maximum . fmap (distance origin) . scanl' move origin . readLines
 
-readLines :: B8.ByteString -> [String]
-readLines =
-  (fmap B8.unpack . B8.split ',')
-  . head
-  . B8.lines
+-- * Utils
+
+readLines :: B8.ByteString -> [B8.ByteString]
+readLines = B8.split ',' . head . B8.lines
