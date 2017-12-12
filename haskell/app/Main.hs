@@ -17,6 +17,7 @@ import qualified Day8 as D8
 import qualified Day9 as D9
 import qualified Day10 as D10
 import qualified Day11 as D11
+import qualified Day12 as D12
 
 data AnyShow = forall a. (NFData a, Show a) => S a 
 instance Show AnyShow where showsPrec p (S a) = showsPrec p a
@@ -55,4 +56,6 @@ main = do
     ("10", "2") -> S . D10.p2
     ("11", "1") -> S . D11.p1
     ("11", "2") -> S . D11.p2
+    ("12", "1") -> S . D12.p1
+    ("12", "2") -> S . D12.p2
     _           -> error "invalid arguments"
