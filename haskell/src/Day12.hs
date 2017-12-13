@@ -1,5 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE BangPatterns #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 
 module Day12 where
 
@@ -9,26 +10,23 @@ import qualified Data.Map.Strict as M
 import Data.Set (Set)
 import qualified Data.Set as Set
 
+
+go :: M.Map Int (Set Int) -> Int -> Set Int
+go m i = loop (Set.singleton 0) (Set.empty) m i
+  where
+    loop !grp !seen  _ !i | Set.member i seen = grp
+    loop !grp !seen !m !i =
+      let Just x = M.lookup i m
+          xs = Set.toList x
+          seen' = Set.insert i seen
+          grps = fmap (loop grp seen' m) xs
+      in Set.unions (x : grp : grps)
+
 -- | Part one
 p1 :: B8.ByteString -> Int
 p1 input = finish $ go (readLines input) 0
   where
     finish grp = Set.size grp
-
-go :: M.Map Int (Set Int) -> Int -> Set Int
-go m i = go' (Set.singleton 0) (Set.empty) m i
-
-go' :: Set Int -> Set Int -> M.Map Int (Set Int) -> Int -> Set Int
-go' !grp !seen !m !i = do
-    if (Set.member i seen)
-    then grp
-    else case M.lookup i m of
-            Just x -> do
-                let xs = Set.toList x
-                    seen' = Set.insert i seen
-                    grps = fmap (\x' -> go' grp seen' m x') xs
-                Set.unions (x : grp : grps)
-            Nothing -> grp
 
 -- | Part two
 p2 :: B8.ByteString -> Int
