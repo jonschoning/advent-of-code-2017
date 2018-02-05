@@ -1,4 +1,4 @@
-aoc=.stack-work/dist/x86_64-linux-nopie/Cabal-1.24.2.0/build/AOC2017/AOC2017
+aoc=.stack-work/dist/x86_64-linux-nopie/Cabal-2.0.1.0/build/AOC2017/AOC2017
 aoc_p=$(aoc) p
 stack = stack
 
